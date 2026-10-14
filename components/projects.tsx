@@ -1,66 +1,37 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import SectionHeading from "./section-heading";
 import { projectsData } from "@/lib/data";
 import Project from "./project";
 import { useSectionInView } from "@/lib/hooks";
-import axios from "axios";
+import Link from "next/link";
+import { BsArrowRight } from "react-icons/bs";
 
 export default function Projects() {
-  const { ref } = useSectionInView("Projects", 0.5);
-  console.log(projectsData)
-  const [projectDataForPage, setProjectData] = useState([]);
-  
-
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        axios.get("http://localhost:8080/projects")
-          .then((response) => {
-            // console.log(response)
-            const { data } = response;
-            let projectData = [];
-            data.map((project) => {
-              const { projectName, projectSummary,technologiesUsed, imagelink } = project;
-              projectData.push({
-                title: projectName,
-                imageUrl: {
-                  blurDataURL: "/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fcorpcomment.3895cd42.png&w=7&q=70",
-                  blurHeight: 8,
-                  blurWidth: 7,
-                  height: 850,
-                  src: imagelink,
-                  width: 715,
-                },
-                tags: technologiesUsed,
-                description: projectSummary,
-              })
-            });
-            setProjectData(projectData);
-            // setHeaderText(about_me);
-          }).catch((error) => {
-            console.log(error);
-          })
-      }
-      catch (error) {
-        alert(error);
-      }
-    };
-    getData();
-    
-  }, []);
-
+  const { ref } = useSectionInView("Projects", 0.3);
 
   return (
-    <section ref={ref} id="projects" className="scroll-mt-28 mb-28">
-      <SectionHeading>My projects</SectionHeading>
-      <div>
-        {projectDataForPage && projectDataForPage.length > 0 && projectDataForPage.map((project, index) => (
-          <React.Fragment key={index}>
-            <Project {...project} />
-          </React.Fragment>
+    <section ref={ref} id="projects" className="scroll-mt-28 mb-24 sm:mb-32 w-full max-w-[50rem] px-4">
+      <SectionHeading>Featured Client Projects</SectionHeading>
+      <p className="text-center text-sm sm:text-base text-gray-600 dark:text-gray-300 -mt-6 mb-10 max-w-[36rem] mx-auto">
+        Real-world platforms I have engineered for international clients across luxury automotive, sports recruiting, luxury manufacturing, and e-commerce.
+      </p>
+
+      <div className="flex flex-col items-center">
+        {projectsData.map((project) => (
+          <Project key={project.id} {...project} />
         ))}
+      </div>
+
+      <div className="mt-8 text-center">
+        <Link
+          href="/projects"
+          className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-indigo-50 border border-indigo-200 text-indigo-700 dark:bg-indigo-950/50 dark:border-indigo-800 dark:text-indigo-300 font-semibold text-sm hover:bg-indigo-100 dark:hover:bg-indigo-900/50 transition group"
+        >
+          View Full Project Case Studies & Architectures
+          <BsArrowRight className="group-hover:translate-x-1 transition" />
+        </Link>
       </div>
     </section>
   );

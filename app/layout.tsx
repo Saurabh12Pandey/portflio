@@ -10,8 +10,25 @@ import { Toaster } from "react-hot-toast";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Ricardo | Personal Portfolio",
-  description: "Ricardo is a full-stack developer with 8 years of experience.",
+  title: "Saurabh Pandey | Full-Stack Web & Mobile App Developer",
+  description:
+    "Portfolio of Saurabh Pandey — Full-Stack Web & Mobile App Developer specializing in custom websites, cross-platform mobile apps, and scalable digital solutions. Featured projects: Level Up Car Rental Dubai, Placely AI, TechniPlast India, Botana Beauty.",
+  keywords: [
+    "Saurabh Pandey",
+    "Full Stack Developer",
+    "Mobile App Developer",
+    "Web Developer Freelancer",
+    "Next.js",
+    "React",
+    "React Native",
+    "TypeScript",
+    "Level Up Car Rental",
+    "Placely",
+  ],
+  authors: [{ name: "Saurabh Pandey" }],
+  icons: {
+    icon: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
@@ -22,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body
-        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90`}
+        className={`${inter.className} bg-gray-50 text-gray-950 relative pt-28 sm:pt-36 dark:bg-gray-900 dark:text-gray-50 dark:text-opacity-90 min-h-screen flex flex-col justify-between`}
       >
         <div className="bg-[#fbe2e3] absolute top-[-6rem] -z-10 right-[11rem] h-[31.25rem] w-[31.25rem] rounded-full blur-[10rem] sm:w-[68.75rem] dark:bg-[#946263]"></div>
         <div className="bg-[#dbd7fb] absolute top-[-1rem] -z-10 left-[-35rem] h-[31.25rem] w-[50rem] rounded-full blur-[10rem] sm:w-[68.75rem] md:left-[-33rem] lg:left-[-28rem] xl:left-[-15rem] 2xl:left-[-5rem] dark:bg-[#676394]"></div>
@@ -30,7 +47,9 @@ export default function RootLayout({
         <ThemeContextProvider>
           <ActiveSectionContextProvider>
             <Header />
-            {children}
+            <div className="flex-grow flex flex-col items-center w-full">
+              {children}
+            </div>
             <Footer />
 
             <Toaster position="top-right" />
